@@ -1,13 +1,14 @@
-import { Button } from "antd"
+import { Button } from "antd";
 
 interface TagProps {
-    tagName: string;
+  tagName: string;
+  onClick?: () => void;
 }
 
-const Tag:React.FC<TagProps> = (props) => {
+const Tag: React.FC<TagProps> = ({ tagName, onClick }) => {
   return (
-    <Button color="gold" variant="solid">{props.tagName}</Button>
-  )
-}
+    <Button color="gold" variant="solid" onClick={onClick}>{tagName}</Button>
+  );
+};
 
-export default Tag
+export default Tag;

@@ -1,20 +1,25 @@
-import { Button } from "antd"
-import Tag from "./Tag"
-import { DeleteFilled } from "@ant-design/icons"
+import { Button } from "antd";
+import Tag from "./Tag";
+import { DeleteFilled } from "@ant-design/icons";
+import { Task } from "../App";
 
-const Card = () => {
-  return (
-    <div className="p-4 border border-gray-200 rounded-md">
-        <p className="font-semibold ">This is Sample text.</p>
-        <div className="flex justify-between items-center mt-4">
-        <div className="flex space-x-2">
-            <Tag tagName="HTML"/>
-            <Tag tagName="JavaScript"/>
-        </div>
-        <Button><DeleteFilled /></Button>
-        </div>
-    </div>
-  )
+interface CardProps {
+  task: Task;
+  deleteTask: (id: number) => void;
 }
 
-export default Card
+const Card: React.FC<CardProps> = ({ task, deleteTask }) => {
+  return (
+    <div className="p-4 border border-gray-200 rounded-md">
+      <p className="font-semibold">{task.title}</p>
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex space-x-2">
+          {task.tags.map(tag => <Tag key={tag} tagName={tag} />)}
+        </div>
+        <Button onClick={() => deleteTask(task.id)}><DeleteFilled /></Button>
+      </div>
+    </div>
+  );
+};
+
+export default Card;
