@@ -51,7 +51,7 @@ To run the project locally, follow these steps:
 
 ### **Add a Task**
 - Enter a title for your task.
-- Select tags (HTML, CSS, JavaScript, etc.).
+- Select tags (Urgent, Important, Later, Low Priority).
 - Choose the status of the task (To-Do, Doing, Done).
 - Click the **Add Task** button to add it to the respective column.
 
