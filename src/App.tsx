@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import { Divider } from "antd";
 import Tasks from "./components/Tasks";
@@ -13,6 +13,21 @@ export interface Task {
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
+  // Load tasks from localStorage on initial render
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+  }, []);
+
+  // Save tasks to localStorage whenever tasks state changes
+  useEffect(() => {
+    if (tasks.length) {
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }, [tasks]);
+
   // Add Task Function
   const addTask = (title: string, status: "todo" | "doing" | "done", tags: string[]) => {
     const newTask: Task = {
@@ -21,12 +36,13 @@ const App: React.FC = () => {
       status,
       tags,
     };
-    setTasks([...tasks, newTask]);
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
   // Delete Task Function
   const deleteTask = (id: number) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    const updatedTasks = tasks.filter(task => task.id !== id);
+    setTasks(updatedTasks);
   };
 
   return (

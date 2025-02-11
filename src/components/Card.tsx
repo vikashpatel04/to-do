@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ task, deleteTask }) => {
     <div className="p-4 border border-gray-200 rounded-md">
       <p className="font-semibold">{task.title}</p>
       <div className="flex justify-between items-center mt-4">
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 flex-wrap">
           {task.tags.map(tag => <Tag key={tag} tagName={tag} />)}
         </div>
         <Button onClick={() => deleteTask(task.id)}><DeleteFilled /></Button>

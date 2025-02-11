@@ -1,13 +1,16 @@
-import { Button } from "antd";
+import { Tag as AntTag, } from "antd";
 
 interface TagProps {
   tagName: string;
   onClick?: () => void;
+  selected?: boolean;
 }
 
-const Tag: React.FC<TagProps> = ({ tagName, onClick }) => {
+const Tag: React.FC<TagProps> = ({ tagName, onClick, selected = false }) => {
   return (
-    <Button color="gold" variant="solid" onClick={onClick}>{tagName}</Button>
+    <AntTag.CheckableTag style={{display:'flex', alignItems:'center'}} checked={selected} onChange={onClick}>
+      {tagName}
+    </AntTag.CheckableTag>
   );
 };
 
